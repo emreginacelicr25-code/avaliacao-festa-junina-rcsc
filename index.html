@@ -144,12 +144,15 @@ var PAINEL_SENHA = "cerdeira2026";
 // Link para a planilha de prestação de contas da festa. O arquivo deve ser
 // enviado para o MESMO repositório do GitHub, na raiz, com este nome exato
 // (ver instruções no README). Se preferir outro nome, ajuste aqui.
-var PRESTACAO_CONTAS_URL = "prestacao-contas-festa-junina-2026.xlsx";
+// Link para o PDF com apenas o Resumo Geral da prestação de contas da festa.
+// O arquivo deve ser enviado para o MESMO repositório do GitHub, na raiz,
+// com este nome exato (ver instruções no README).
+var PRESTACAO_CONTAS_URL = "resumo-geral-festa-junina-2026.pdf";
 
 var sbClient = null;
 
 var FUNCOES = [
-  "Diretor(a)", "Coordenador(a) Pedagógico(a)", "Orientador(a) Educacional",
+  "Diretor(a)", "Orientador(a) Pedagógico(a)", "Orientador(a) Educacional",
   "Psicólogo(a) Escolar", "Professor(a) Regente", "Professor(a) de AEE",
   "Professor(a) de Classe Especial", "Mediador(a) / Monitor(a)",
   "Secretaria", "ASG / Apoio", "Porteiro(a)", "Outro"
@@ -206,6 +209,7 @@ function el(tag, attrs, children){
   var e = document.createElement(tag);
   attrs = attrs || {};
   for (var k in attrs){
+    if (attrs[k] === null || attrs[k] === undefined) continue;
     if (k === "class") e.className = attrs[k];
     else if (k === "html") e.innerHTML = attrs[k];
     else if (k.indexOf("on") === 0) e.addEventListener(k.substring(2), attrs[k]);
@@ -249,7 +253,7 @@ function render(){
     el("h2", {}, ["🎉 Avaliação da Festa Julina 2026"]),
     el("p", {}, ["EM Regina Celi da Silva Cerdeira — preenchimento da equipe"]),
     el("a", { class: "accounts-link", href: PRESTACAO_CONTAS_URL, target: "_blank", rel: "noopener" },
-      ["📊 Ver prestação de contas da festa"])
+      ["📊 Ver Resumo Geral (PDF)"])
   ]));
 
   if (!state.submitted){
@@ -663,7 +667,7 @@ function renderPainel(root){
     root.appendChild(el("div", { class: "topbar" }, [
       el("h2", {}, ["🎉 Avaliação da Festa Julina 2026"]),
       el("a", { class: "accounts-link", href: PRESTACAO_CONTAS_URL, target: "_blank", rel: "noopener" },
-        ["📊 Ver prestação de contas da festa"])
+        ["📊 Ver Resumo Geral (PDF)"])
     ]));
     root.appendChild(wrap);
     return;
@@ -672,7 +676,7 @@ function renderPainel(root){
   root.appendChild(el("div", { class: "topbar" }, [
     el("h2", {}, ["📊 Painel — Avaliação da Festa Julina 2026"]),
     el("a", { class: "accounts-link", href: PRESTACAO_CONTAS_URL, target: "_blank", rel: "noopener" },
-      ["📊 Ver prestação de contas da festa"])
+      ["📊 Ver Resumo Geral (PDF)"])
   ]));
   var pw = el("div", { class: "painel-wrap" });
   root.appendChild(pw);
